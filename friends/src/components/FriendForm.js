@@ -38,6 +38,7 @@ class FriendForm extends React.Component {
   // });
 
   handleSubmit = e => {
+    e.preventDefault();
     this.props.addFriend(e, this.state.friend);
     this.setState({
       item: {
