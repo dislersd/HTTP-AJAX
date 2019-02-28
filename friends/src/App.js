@@ -95,14 +95,21 @@ class App extends Component {
               {...this.state}
               {...props}
               delete={this.deleteFriend}
-              update={this.setUpdateForm}
+              setUpdate={this.setUpdateForm}
             />
           )}
         />
         <Route
           exact
           path="/friend-form"
-          render={props => <FriendForm {...props} addFriend={this.addFriend} />}
+          render={props => (
+            <FriendForm
+              {...props}
+              activeFriend={this.state.activeFriend}
+              addFriend={this.addFriend}
+              update={this.updateFriend}
+            />
+          )}
         />
       </div>
     );
