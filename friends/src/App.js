@@ -11,6 +11,7 @@ class App extends Component {
     super();
     this.state = {
       friends: [],
+      activeFriend: null,
       error: ""
     };
   }
@@ -53,6 +54,30 @@ class App extends Component {
       });
   };
 
+  setUpdateForm = (e, friend) => {
+    e.preventDefault();
+    this.setState({
+      activeFriend: friend
+    });
+    this.props.history.push("/friend-form");
+  };
+
+  updateFriend = (e, friend) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:5000/friends/${friend.id}`, friend)
+      .then(res => {
+        this.setState({
+          activeFriend: null,
+          friends: res.data
+        });
+        this.props.history.push("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div className="App">
@@ -65,7 +90,14 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={props => <FriendsList {...this.state} {...props} delete={this.deleteFriend} />}
+          render={props => (
+            <FriendsList
+              {...this.state}
+              {...props}
+              delete={this.deleteFriend}
+              update={this.setUpdateForm}
+            />
+          )}
         />
         <Route
           exact
