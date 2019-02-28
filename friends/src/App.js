@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FriendsList from "./components/FriendsList";
 import FriendForm from './components/FriendForm';
+import { NavLink } from 'react-router-dom';
 import axios from "axios";
 import { Route } from "react-router-dom";
 import "./App.css";
@@ -24,6 +25,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <NavLink to='/'>
+          <button>Home</button>
+        </NavLink>
+        <NavLink to='/friend-form'>
+          <button>Add Friend</button>
+        </NavLink>
         <Route
           exact
           path="/"
