@@ -22,7 +22,7 @@ class FriendForm extends React.Component {
       }
     }));
   };
-  
+
   // We have a nested object on state - Here are the steps to update
   // a single property on that nested object
 
@@ -37,10 +37,21 @@ class FriendForm extends React.Component {
   //   }
   // });
 
+  handleSubmit = e => {
+    this.props.addFriend(e, this.state.friend);
+    this.setState({
+      item: {
+        name: "",
+        age: "",
+        email: "",
+      }
+    });
+  };
+
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="name"
